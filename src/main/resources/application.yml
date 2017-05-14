@@ -1,0 +1,5 @@
+spring.profiles: dev
+# use local or embedded mongodb at localhost:27017
+---
+spring.profiles: production
+spring.data.mongodb.uri: mongodb://heroku_85bqfp48:meom76r00tlr5kb45a2jmg3erk@ds013366.mlab.com:13366/heroku_85bqfp48
