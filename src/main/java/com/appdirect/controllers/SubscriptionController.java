@@ -2,12 +2,14 @@ package com.appdirect.controllers;
 
 import java.net.URI;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth.consumer.client.OAuthRestTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
 import com.appdirect.AppDirectResponse;
 import com.appdirect.ErrorCode;
@@ -16,6 +18,10 @@ import com.appdirect.ErrorCode;
 @RequestMapping("/subscription")
 public class SubscriptionController {
 
+	@Autowired
+	@Qualifier("oAuthRestTemplate")
+	private OAuthRestTemplate restTemplate; 
+	
 	@RequestMapping(value = "/create", produces = "application/json")
 	public @ResponseBody AppDirectResponse createSubscription(
 			@RequestParam(required = true, name = "url") String eventUrl) {
@@ -25,7 +31,6 @@ public class SubscriptionController {
 		try {
 			URI uri = new URI(eventUrl);
 
-			RestTemplate restTemplate = new RestTemplate();
 			ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
 
 			ret = response.getBody();
