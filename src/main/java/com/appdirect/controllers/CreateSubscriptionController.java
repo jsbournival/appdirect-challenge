@@ -1,13 +1,7 @@
 package com.appdirect.controllers;
 
-import java.net.URI;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth.consumer.client.OAuthRestTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,29 +12,19 @@ import com.appdirect.ErrorCode;
 
 @Controller
 @RequestMapping("/subscription")
-public class SubscriptionController {
+public class CreateSubscriptionController extends AbstractController {
 	
-	private static Logger LOGGER = LoggerFactory.getLogger(SubscriptionController.class); 
-	
-	@Autowired
-	@Qualifier("oauthRestTemplate")
-	OAuthRestTemplate restTemplate; 
-	
+	private static Logger LOGGER = LoggerFactory.getLogger(CreateSubscriptionController.class); 
+		
 	@RequestMapping(value = "/create", produces = "application/json")
-	public @ResponseBody AppDirectResponse createSubscription(
+	public @ResponseBody AppDirectResponse handleNotification(
 			@RequestParam(required = true, name = "url") String eventUrl) {
 
-		String ret = "nothing";
-
 		try {
-			URI uri = new URI(eventUrl);
-
-			ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-
-			ret = response.getBody();
+			String jsonObject = getNotification(eventUrl);
 			
-			LOGGER.info(ret);
-
+			LOGGER.info(jsonObject);
+			
 		} catch (Exception e) {
 			return AppDirectResponse.builder(false).errorCode(ErrorCode.UNKNOWN_ERROR)
 					.message(e.getMessage()).createResponse();
