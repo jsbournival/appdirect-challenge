@@ -17,10 +17,10 @@ import com.appdirect.ErrorCode;
 @Controller
 @RequestMapping("/subscription")
 public class SubscriptionController {
-
+	
 	@Autowired
-	@Qualifier("oAuthRestTemplate")
-	private OAuthRestTemplate restTemplate; 
+	@Qualifier("oauthRestTemplate")
+	OAuthRestTemplate restTemplate; 
 	
 	@RequestMapping(value = "/create", produces = "application/json")
 	public @ResponseBody AppDirectResponse createSubscription(

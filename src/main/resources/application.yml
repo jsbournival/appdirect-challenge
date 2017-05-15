@@ -1,3 +1,7 @@
+oauth.key: group-membership-164662
+oauth.secret: fvn6oeuA6rgIWe0E
+
+---
 spring.profiles: dev
 # use local or embedded mongodb at localhost:27017
 ---
