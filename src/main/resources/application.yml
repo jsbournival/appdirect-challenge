@@ -1,3 +1,6 @@
+security.basic.enabled: false
+management.security.enabled: false
+
 oauth.key: group-membership-164662
 oauth.secret: fvn6oeuA6rgIWe0E
 
