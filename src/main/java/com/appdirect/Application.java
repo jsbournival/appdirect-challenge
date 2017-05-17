@@ -11,6 +11,9 @@ import org.springframework.security.oauth.consumer.BaseProtectedResourceDetails;
 import org.springframework.security.oauth.consumer.ProtectedResourceDetails;
 import org.springframework.security.oauth.consumer.client.OAuthRestTemplate;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.basic.DefaultOAuthConsumer;
 
@@ -43,6 +46,13 @@ public class Application {
 	@Bean
 	public OAuthConsumer oAuthConsumer() {
 		return new DefaultOAuthConsumer("group-membership-164662", "fvn6oeuA6rgIWe0E");
+	}
+	
+	@Bean
+	public ObjectMapper jsonMapper() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		return mapper;
 	}
 
 	public static void main(String[] args) {

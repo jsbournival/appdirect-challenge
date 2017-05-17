@@ -13,21 +13,22 @@ import com.appdirect.ErrorCode;
 import com.appdirect.services.SubscriptionService;
 
 @Controller
-public class CreateSubscriptionController extends AbstractController {
-	
-	private static Logger LOGGER = LoggerFactory.getLogger(CreateSubscriptionController.class);
+public class CancelSubscriptionController extends AbstractController {
+
+	private static Logger LOGGER = LoggerFactory.getLogger(CancelSubscriptionController.class);
 	
 	@Autowired
 	private SubscriptionService subscriptionService;
-		
-	@RequestMapping(value = "/create", produces = "application/json")
+	
+	@RequestMapping("/cancel")
+	@Override
 	public @ResponseBody AppDirectResponse handleNotification(
 			@RequestParam(required = true, name = "url") String eventUrl) {
-		LOGGER.info("create subscription controller called");
+		LOGGER.info("cancel subscription controller called");
 		
 		try {
-			String id = subscriptionService.createUser(getNotification(eventUrl));
-			return AppDirectResponse.builder(true).accountIdentifier(id).createResponse();
+			subscriptionService.deleteUser(getNotification(eventUrl));
+			return AppDirectResponse.builder(true).createResponse();
 		} catch (Exception e) {
 			return AppDirectResponse.builder(false).errorCode(ErrorCode.UNKNOWN_ERROR)
 					.message(e.getMessage()).createResponse();
