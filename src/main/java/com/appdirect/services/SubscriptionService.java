@@ -44,7 +44,7 @@ public class SubscriptionService {
 	 * @return The account identifier for the deleted user
 	 */
 	public void deleteUser(String jsonObject) throws Exception {
-		LOGGER.info("create user service called");
+		LOGGER.info("delete user service called");
 		
 		// retrieve account to delete
 		String id = jsonMapper.readTree(jsonObject).at("/payload/account/accountIdentifier").asText();

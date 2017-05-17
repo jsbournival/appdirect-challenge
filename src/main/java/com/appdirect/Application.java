@@ -14,9 +14,6 @@ import org.springframework.security.oauth.consumer.client.OAuthRestTemplate;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.basic.DefaultOAuthConsumer;
-
 @SpringBootApplication
 public class Application {
 
@@ -36,18 +33,13 @@ public class Application {
 	public ProtectedResourceDetails getProtectedResourceDetails() {
 
 		LOGGER.info("config oauth with values {} {}", oauthKey, oauthSecret);
-		
+
 		final BaseProtectedResourceDetails resource = new BaseProtectedResourceDetails();
 		resource.setConsumerKey(oauthKey);
 		resource.setSharedSecret(new SharedConsumerSecretImpl(oauthSecret));
 		return resource;
 	}
 
-	@Bean
-	public OAuthConsumer oAuthConsumer() {
-		return new DefaultOAuthConsumer("group-membership-164662", "fvn6oeuA6rgIWe0E");
-	}
-	
 	@Bean
 	public ObjectMapper jsonMapper() {
 		ObjectMapper mapper = new ObjectMapper();
