@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>JS Bournival - AppDirect</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<title>JS Bournival - AppDirect</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
-	Hello
-	
-	<script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<h1>AppDirect App Users</h1>
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th>Uuid</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.getUuid()}"></td>
+				<td th:text="${user.getFirstName()}"></td>
+				<td th:text="${user.getLastName()}"></td>
+				<td th:text="${user.getEmail()}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
