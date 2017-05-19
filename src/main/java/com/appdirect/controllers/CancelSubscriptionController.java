@@ -9,29 +9,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.appdirect.AppDirectResponse;
-import com.appdirect.ErrorCode;
+import com.appdirect.exceptions.AppDirectException;
 import com.appdirect.services.SubscriptionService;
 
 @Controller
 public class CancelSubscriptionController extends AbstractController {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(CancelSubscriptionController.class);
-	
+
 	@Autowired
 	private SubscriptionService subscriptionService;
-	
-	@RequestMapping("/cancel")
+
 	@Override
+	@RequestMapping("/cancel")
 	public @ResponseBody AppDirectResponse handleNotification(
-			@RequestParam(required = true, name = "url") String eventUrl) {
+			@RequestParam(required = true, name = URL_PARAMETER) String eventUrl) throws AppDirectException {
 		LOGGER.info("cancel subscription controller called");
-		
-		try {
-			subscriptionService.deleteUser(getNotification(eventUrl));
-			return AppDirectResponse.builder(true).createResponse();
-		} catch (Exception e) {
-			return AppDirectResponse.builder(false).errorCode(ErrorCode.UNKNOWN_ERROR)
-					.message(e.getMessage()).createResponse();
-		}
+
+		subscriptionService.deleteUser(getNotification(eventUrl));
+		return AppDirectResponse.builder(true).createResponse();
 	}
 }
