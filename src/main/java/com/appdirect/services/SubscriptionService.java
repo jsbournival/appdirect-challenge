@@ -55,6 +55,8 @@ public class SubscriptionService {
 		LOGGER.info("delete user service called");
 
 		try {
+			LOGGER.debug(jsonObject);
+			
 			// retrieve account to delete
 			String id = jsonMapper.readTree(jsonObject).at("/payload/account/accountIdentifier").asText();
 
