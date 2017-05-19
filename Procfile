@@ -1,1 +1,1 @@
-web java -Dspring.profiles.active=production -Dserver.port=$PORT $JAVA_OPTS -jar target/gs-serving-web-content-0.1.0.jar
+web java -Dspring.profiles.active=production -Dserver.port=$PORT $JAVA_OPTS -jar target/com.appdirect.jsbournival-0.1.0.jar
