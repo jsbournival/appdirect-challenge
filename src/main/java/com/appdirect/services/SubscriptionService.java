@@ -1,6 +1,7 @@
 package com.appdirect.services;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,5 +66,16 @@ public class SubscriptionService {
 		} catch (IOException e) {
 			throw new AppDirectException(ErrorCode.UNKNOWN_ERROR, e.getMessage());
 		}
+	}
+	
+	/**
+	 * Returns all user in data layer
+	 * 
+	 * @return a {@link List} of {@link User}
+	 */
+	public List<User> findAllUsers() {
+		LOGGER.info("find all users service called");
+		
+		return userRepository.findAll();
 	}
 }
